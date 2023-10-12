@@ -34,7 +34,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-
       - name: Configure AWS credentials
         id: creds
         uses: aws-actions/configure-aws-credentials@v1
@@ -42,7 +41,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-     
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
@@ -55,11 +54,11 @@ jobs:
           # invalidated on changes to pom.xml
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m
-        
+
       - name: Setup Maven repository
         id: configure-maven-settings
         run: cp $GITHUB_WORKSPACE/.maven.settings.xml $HOME/.m2/settings.xml
-      
+
       - name: extract build tag
         id: extract_tag
         env:
@@ -129,4 +128,3 @@ jobs:
              echo "Deploying Maven artifacts for non-tagged build(snapshots)"
              ant clean -Dm2.repository.id=github -Dm2.repository.url=https://maven.pkg.github.com/unbxd/artifacts generate-maven-artifacts
           fi
-
