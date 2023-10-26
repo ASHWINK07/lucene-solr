@@ -390,7 +390,7 @@
   <!-- ================================================================== -->
   <target name="dist-src" depends="package-tgz-src"/>
 
-  <target name="dist-all" depends="dist, dist-src, -dist-changes, -dist-keys"/>
+  <target name="dist-all" depends="dist, dist-src, -dist-changes"/>
 
   <!-- copy changes/ to the release folder -->
   <target name="-dist-changes">
@@ -400,10 +400,10 @@
   </target>
 
   <!-- copy KEYS to the release folder -->
-  <target name="-dist-keys">
-   <get src="http://home.apache.org/keys/group/lucene.asc" 
-        dest="${dist.dir}/KEYS"/>
-  </target>
+<!--  <target name="-dist-keys">-->
+<!--   <get src="http://home.apache.org/keys/group/lucene.asc" -->
+<!--        dest="${dist.dir}/KEYS"/>-->
+<!--  </target>-->
 
   <target name="copy-to-stage">
     <copy-to-stage-macro artifacts.dir="${dist.dir}"/>
